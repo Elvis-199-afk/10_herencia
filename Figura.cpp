@@ -7,6 +7,9 @@ class Figura{
 		string color;
 	public:
 		Figura(string);
+		string getColor() const {
+			return color;
+		}
 };
 Figura::Figura(string c){
 	color=c;
@@ -41,6 +44,7 @@ class Rectangulo : public Figura{
 	public:
 		Rectangulo(string,float,float);
 		void calcularArea();
+		void calcularPerimetro();
 };
 
 Rectangulo::Rectangulo(string c,float b,float h):Figura(c){
@@ -50,7 +54,9 @@ Rectangulo::Rectangulo(string c,float b,float h):Figura(c){
 void Rectangulo::calcularArea(){
 	cout<<"El area del rectangulo es: "<<base*altura<<endl;
 }
-
+void Rectangulo::calcularPerimetro(){
+	cout<<"El perimetro del rectangulo es: "<<(base+altura)*2<<endl;
+}
 
 class Triangulo : Figura{
 	private:
@@ -72,7 +78,6 @@ void Triangulo::calcularArea(){
 }
 
 int main(){
-	Circulo c("Verde",5);
 	int op;
 	do{
 		system("cls");
@@ -86,6 +91,8 @@ int main(){
 		
 		switch(op){
 			case 1:
+				{
+				
 				cout<<"Ingrese el color del circulo: ";
 				string col;
 				cin>>col;
@@ -94,39 +101,73 @@ int main(){
 				cin>>radi;
 				Circulo c(col,radi);
 				int oper;
-				do{
-					system("cls");
-					cout<<"1. Calcular Area\n";
-					cout<<"2. Calcular Perimetro\n";
-					cout<<"3. Regresar\n\n";
-					cin>>oper;
-					switch(oper){
-						case 1:
-							c.calcularArea();
-							system("pause");
-							break;
-						case 2:
-							c.calcularPerimetro();
-							system("pause");
-							break;
-						case 3:
-							break;
-						default:
-							cout<<"Ingrese una opcion valida\n";
-							system("pause");
-							break;
-					}
-				}while(oper!=3);
+				system("cls");
+				cout<<"\nLos datos del circulo son los siguientes: \n";
+				cout<<"\nEl area es: ";
+				c.calcularArea();
+				cout<<"\nEl Perimetro es: ";
+				c.calcularPerimetro();
+				cout<<"El color es: ";
+				cout<<c.getColor()<<endl;
+				system("pause");
+				break;
+			}
+			case 2:
+				{
 				
+				cout<<"Ingrese el color del rectangulo: ";
+				string col;
+				cin>>col;
+				cout<<"Ingrese la base y altura del rectangulo: \n";
+				float bas,alt; 
+				cout<<"B = ";
+				cin>>bas;
+				cout<<"H = ";
+				cin>>alt;
+				Rectangulo R(col,bas,alt);
+				system("cls");
+				cout<<"\nLos datos del rectangulo son los siguientes: \n";
+				cout<<"\nEl area es: ";
+				R.calcularArea();
+				cout<<"\nEl Perimetro es: ";
+				R.calcularPerimetro();
+				cout<<"El color es: "<<R.getColor()<<endl;
+				system("pause");
+				break;
+			}
+			case 3:
+				{
+				
+				cout<<"Ingrese el color del Triangulo: ";
+				string color;
+				cin>>color;
+				cout<<"Ingrese la base y altura del rectangulo: \n";
+				float bas,alt; 
+				cout<<"B = ";
+				cin>>bas;
+				cout<<"H = ";
+				cin>>alt;
+				cout<<"Ingrese el tipo de triangulo que es: ";
+				string tipo;
+				cin>>tipo;
+				Triangulo t(color,bas,alt,tipo);
+				system("cls");
+				cout<<"\nLos datos del triangulo son los siguientes: \n";
+				cout<<"\nEl area es: ";
+				t.calcularArea();
+				cout<<"El tipo de triangulo es: "<<tipo<<endl;
+				system("pause");
+				break;
+			}
+			case 4:
+				cout<<"\nSALIENDO . . . \n";
+				system("pause");
+				break;
+			default:
+            	cout<<"Opción inválida. Intente de nuevo.\n";
+            	system("pause");
+            	break;
 		}
 	}while(op!=4);
-	
-	
-	
-	
-
-	cout<<endl;
-	
-	
 	return 0;
 }
